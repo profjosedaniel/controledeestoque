@@ -1,0 +1,76 @@
+@startuml
+actor Usuario
+participant APP
+participant LoginCLI
+participant MenuCLI
+participant FabricanteCLI
+participant ProdutoCLI
+participant EstoqueCLI
+participant FuncionarioCLI
+participant RepresentanteCLI
+participant MovimentacaoCLI
+
+Usuario -> APP: Executar APP.java
+activate APP
+APP -> LoginCLI: Executar LoginCLI.java
+activate LoginCLI
+LoginCLI -> Usuario: Solicitar credenciais
+Usuario -> LoginCLI: Inserir credenciais
+LoginCLI -> LoginCLI: Verificar credenciais
+LoginCLI -> APP: Credenciais válidas
+deactivate LoginCLI
+APP -> MenuCLI: Executar MenuCLI.java
+activate MenuCLI
+MenuCLI -> Usuario: Mostrar menu principal
+loop Escolher opção
+    Usuario -> MenuCLI: Selecionar opção
+    alt Opção: Fabricante
+        MenuCLI -> FabricanteCLI: Executar FabricanteCLI.java
+        activate FabricanteCLI
+        FabricanteCLI -> Usuario: Interação CRUD Fabricante
+        Usuario -> FabricanteCLI: Operação CRUD
+        FabricanteCLI -> FabricanteCLI: Processar operação
+        deactivate FabricanteCLI
+    else Opção: Produto
+        MenuCLI -> ProdutoCLI: Executar ProdutoCLI.java
+        activate ProdutoCLI
+        ProdutoCLI -> Usuario: Interação CRUD Produto
+        Usuario -> ProdutoCLI: Operação CRUD
+        ProdutoCLI -> ProdutoCLI: Processar operação
+        deactivate ProdutoCLI
+    else Opção: Estoque
+        MenuCLI -> EstoqueCLI: Executar EstoqueCLI.java
+        activate EstoqueCLI
+        EstoqueCLI -> Usuario: Interação CRUD Estoque
+        Usuario -> EstoqueCLI: Operação CRUD
+        EstoqueCLI -> EstoqueCLI: Processar operação
+        deactivate EstoqueCLI
+    else Opção: Funcionario
+        MenuCLI -> FuncionarioCLI: Executar FuncionarioCLI.java
+        activate FuncionarioCLI
+        FuncionarioCLI -> Usuario: Interação CRUD Funcionario
+        Usuario -> FuncionarioCLI: Operação CRUD
+        FuncionarioCLI -> FuncionarioCLI: Processar operação
+        deactivate FuncionarioCLI
+    else Opção: Representante
+        MenuCLI -> RepresentanteCLI: Executar RepresentanteCLI.java
+        activate RepresentanteCLI
+        RepresentanteCLI -> Usuario: Interação CRUD Representante
+        Usuario -> RepresentanteCLI: Operação CRUD
+        RepresentanteCLI -> RepresentanteCLI: Processar operação
+        deactivate RepresentanteCLI
+    else Opção: Movimentação
+        MenuCLI -> MovimentacaoCLI: Executar MovimentacaoCLI.java
+        activate MovimentacaoCLI
+        MovimentacaoCLI -> Usuario: Interação CRUD Movimentação
+        Usuario -> MovimentacaoCLI: Operação CRUD
+        MovimentacaoCLI -> MovimentacaoCLI: Processar operação
+        deactivate MovimentacaoCLI
+    else Opção: Sair
+        Usuario -> MenuCLI: Sair
+        MenuCLI -> APP: Terminar execução
+        deactivate MenuCLI
+        deactivate APP
+    end
+end
+@enduml

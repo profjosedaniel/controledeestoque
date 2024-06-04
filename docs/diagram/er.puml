@@ -1,0 +1,73 @@
+@startchen
+
+entity Fabricante {
+    cnpj <<key>>
+    nome <<NOT NULL>>
+    endereco
+    contato
+}
+
+entity Produto {
+    id <<key>>
+    nome <<NOT NULL>>
+    codigoDeBarras <<UNIQUE, NOT NULL>>
+    preco <<NOT NULL>>
+    descricao
+    quantidadeEmEstoque 
+}
+
+entity Estoque {
+    id <<key>>
+    nome <<NOT NULL>>
+    localizacao
+    quantidade 
+}
+
+entity Funcionario {
+    cpf <<key>>
+    nome <<NOT NULL>>
+    telefone
+    email <<UNIQUE>>
+    papel
+    password 
+}
+
+entity Representante {
+    cpf <<key>>
+    nome <<NOT NULL>>
+    telefone
+    email
+}
+
+entity RepresentanteFabricante {
+    representante <<FK>>
+    fabricante <<FK>>
+}
+
+entity armazenamento {
+    estoque_id <<FK>>
+    quantidade 
+}
+
+entity Movimentacao {
+    id <<key>>
+    dataEHora
+    quantidade
+    produto <<FK>>
+    funcionario <<FK>>
+    estoque <<FK>>
+    tipoDeTransacao
+}
+
+Fabricante =(1,N)= Produto
+ 
+
+Representante =(1,N)= RepresentanteFabricante
+Fabricante =(1,N)= RepresentanteFabricante
+Produto =(1,N)= armazenamento
+Estoque =(1,N)= armazenamento
+Produto =(1,N)= Movimentacao
+Funcionario =(1,N)= Movimentacao
+Estoque =(1,N)= Movimentacao
+ 
+@endchen

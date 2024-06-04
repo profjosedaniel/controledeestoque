@@ -1,0 +1,78 @@
+@startuml
+entity Fabricante {
+  * cnpj: CHAR(14)
+  --
+  nome: VARCHAR(200)
+  endereco: VARCHAR(255)
+  contato: VARCHAR(255)
+}
+
+entity Produto {
+  * id: SERIAL
+  --
+  nome: VARCHAR(255)
+  codigoDeBarras: VARCHAR(255)
+  preco: FLOAT
+  descricao: TEXT
+  quantidadeEmEstoque: INT
+  fabricante: CHAR(14)
+}
+
+entity Estoque {
+  * id: SERIAL
+  --
+  nome: VARCHAR(100)
+  localizacao: VARCHAR(255)
+  quantidade: INT
+}
+
+entity Funcionario {
+  * cpf: CHAR(11)
+  --
+  nome: VARCHAR(255)
+  telefone: CHAR(11)
+  email: VARCHAR(255)
+  papel: VARCHAR(150)
+  password: VARCHAR(64)
+}
+
+entity Representante {
+  * cpf: CHAR(11)
+  --
+  nome: VARCHAR(255)
+  telefone: CHAR(11)
+  email: VARCHAR(100)
+}
+
+entity RepresentanteFabricante {
+  * representante: CHAR(11)
+  * fabricante: CHAR(14)
+}
+
+entity Armazenamento {
+  * estoque_id: INT
+  * produto_id: INT
+  --
+  quantidade: INT
+}
+
+entity Movimentacao {
+  * id: SERIAL
+  --
+  dataEHora: TIMESTAMP
+  quantidade: INT
+  produto: SERIAL
+  funcionario: CHAR(11)
+  estoque: SERIAL
+  tipoDeTransacao: VARCHAR(11)
+}
+
+Fabricante ||--o{ Produto : fabrica
+Representante ||--o{ RepresentanteFabricante : representa
+Fabricante ||--o{ RepresentanteFabricante : representa
+Produto ||--o{ Armazenamento : armazenado_em
+Estoque ||--o{ Armazenamento : possui
+Produto ||--o{ Movimentacao : movimenta
+Funcionario ||--o{ Movimentacao : realiza
+Estoque ||--o{ Movimentacao : envolvido_em
+@enduml
