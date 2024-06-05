@@ -8,15 +8,14 @@ public class Estoque {
 	private int id;
     private String nome;
     private String localizacao;
-    private int quantidade;
+
  
 	public Estoque(){}
-	public Estoque(int id, String nome, String localizacao, int quantidade ) {
+	public Estoque(int id, String nome, String localizacao ) {
 			this.id = id;
 			this.nome = nome;
 			this.localizacao = localizacao;
-			this.quantidade = quantidade;
-	 
+
 	}
 
     public int getId() {
@@ -38,13 +37,6 @@ public class Estoque {
 		this.localizacao = localizacao;
 	}
  
-	public int getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
-
+ 
  
 }

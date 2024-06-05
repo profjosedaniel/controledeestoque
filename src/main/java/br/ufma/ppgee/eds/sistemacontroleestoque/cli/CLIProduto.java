@@ -9,7 +9,21 @@ import br.ufma.util.LerTerminal;
 
 public class CLIProduto extends CLIAbstractCRUD<Produto>{
     private ProdutoDAO produtoDAO;
- 
+    
+    @Override
+    public void opcoesMenu() {
+      
+        super.opcoesMenu();
+        System.out.println("6 - Relatório de produtos");
+    }
+    @Override
+    public boolean acoesMenu(int opcao) {
+        if(opcao==6){
+            relatorio();
+            return true;
+        }
+        return super.acoesMenu(opcao);
+    }
 
     public static void main(String[] args) {
         
@@ -40,7 +54,7 @@ public class CLIProduto extends CLIAbstractCRUD<Produto>{
         System.out.println("Descrição: " + produto.getDescricao()); 
         System.out.println("Preço: " + produto.getPreco());
         System.out.println("Código de barras: " + produto.getCodigoDeBarras());
-        System.out.println("Quantidade em estoque: " + produto.getQuantidadeEmEstoque());
+        // System.out.println("Quantidade em estoque: " + produto.getQuantidadeEmEstoque());
         System.out.println("=======================================");
     }
 
@@ -62,15 +76,20 @@ public class CLIProduto extends CLIAbstractCRUD<Produto>{
     }
 
     public Produto update(Produto produto) {
-  
         produto.setNome(terminal.nextString("nome",false));
         produto.setDescricao(terminal.nextLine("descrição",false));
         produto.setPreco(terminal.nextDouble("preço",true));
-        produto.setQuantidadeEmEstoque(terminal.nextInt("quantidade",true));
+        // produto.setQuantidadeEmEstoque(terminal.nextInt("quantidade",true));
         produto.setCodigoDeBarras(terminal.nextString("código de barras",true));
         return produto;
          
     }
-
+    void relatorio() {
+        try {
+            new CliTable().visualize(getDAO().relatorio());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
    
 }

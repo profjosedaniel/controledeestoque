@@ -146,5 +146,11 @@ public class RepresentanteDAO implements DAOInterface<Representante, String> {
     }
 
   
+    public ResultSet relatorio() throws SQLException {
+        String sql = "SELECT  * from representantes_fabricantes";
+        PreparedStatement statement = connection.prepareStatement(sql);
  
+        ResultSet resultSet = statement.executeQuery();
+        return resultSet;
+    }
  }

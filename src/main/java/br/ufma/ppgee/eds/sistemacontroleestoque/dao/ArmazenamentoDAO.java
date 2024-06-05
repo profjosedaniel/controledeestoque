@@ -63,4 +63,24 @@ public class ArmazenamentoDAO  {
         statement.execute();
     }
     
+
+    public void movimentar(Estoque estoque,Produto produto,int quantidade) throws SQLException{
+        Armazenamento armazenamento=get(estoque, produto);
+        if(armazenamento==null){
+            armazenamento=new Armazenamento();
+            armazenamento.setEstoque(estoque);
+            armazenamento.setProduto(produto);
+            armazenamento.setQuantidade(0);
+            save(armazenamento);
+        }
+        armazenamento=get(estoque, produto);
+        if(armazenamento!=null){
+            if(armazenamento.getQuantidade()+quantidade<0){
+                throw new IllegalArgumentException("Quantidade insuficiente no estoque");
+            }
+            armazenamento.setQuantidade(armazenamento.getQuantidade()+quantidade);
+            update(armazenamento);
+        }
+    }
+
 }

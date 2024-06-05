@@ -39,15 +39,6 @@ entity Representante {
     email
 }
 
-entity RepresentanteFabricante {
-    representante <<FK>>
-    fabricante <<FK>>
-}
-
-entity armazenamento {
-    estoque_id <<FK>>
-    quantidade 
-}
 
 entity Movimentacao {
     id <<key>>
@@ -59,15 +50,12 @@ entity Movimentacao {
     tipoDeTransacao
 }
 
-Fabricante =(1,N)= Produto
- 
-
-Representante =(1,N)= RepresentanteFabricante
-Fabricante =(1,N)= RepresentanteFabricante
-Produto =(1,N)= armazenamento
-Estoque =(1,N)= armazenamento
-Produto =(1,N)= Movimentacao
-Funcionario =(1,N)= Movimentacao
-Estoque =(1,N)= Movimentacao
- 
+Fabricante =(N,N)= Produto
+Representante =(N,N)= Fabricante 
+Estoque =(N,N)= Produto 
+Produto =(N,N)= Fabricante 
+Funcionario =(N,N)= Estoque
+Produto =(N,N)= Movimentacao
+Estoque =(N,N)= Movimentacao
+Funcionario =(N,N)= Movimentacao
 @endchen

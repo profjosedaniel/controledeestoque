@@ -29,9 +29,9 @@ public class TestProduto {
         produto.setNome(nome);
         produto.setDescricao(descricao);
         produto.setPreco(preco);
-        produto.setQuantidadeEmEstoque(quantidadeEmEstoque);
+        // produto.setQuantidadeEmEstoque(quantidadeEmEstoque);
         produto.setCodigoDeBarras(codigoBarras);
-        produto.setFabricante(fabricante);
+       //produto.setFabricante(fabricante);
         //save
         daoProduto.create(produto);
         // get e 
@@ -44,7 +44,7 @@ public class TestProduto {
         assert produto2.getNome().equals("Produto 1");
         assert produto2.getDescricao().equals("Descricao 1");
         assert produto2.getPreco() == 10.0;
-        assert produto2.getQuantidadeEmEstoque() == 10;
+        // assert produto2.getQuantidadeEmEstoque() == 10;
         //update
         nome="Produto 2";
         descricao="Descricao 2";
@@ -53,7 +53,7 @@ public class TestProduto {
         produto2.setNome(nome);
         produto2.setDescricao(descricao);
         produto2.setPreco(preco);
-        produto2.setQuantidadeEmEstoque(quantidadeEmEstoque);
+        // produto2.setQuantidadeEmEstoque(quantidadeEmEstoque);
          
         daoProduto.update(produto2);
         //get
@@ -62,7 +62,7 @@ public class TestProduto {
         assert produto3.getNome().equals(nome);
         assert produto3.getDescricao().equals(descricao);
         assert produto3.getPreco() == 20.0;
-        assert produto3.getQuantidadeEmEstoque() == quantidadeEmEstoque;    
+        // assert produto3.getQuantidadeEmEstoque() == quantidadeEmEstoque;    
         //delete
         daoProduto.delete(produto3.getId());
         Produto produto4 = daoProduto.get(codigoBarras);

@@ -1,12 +1,16 @@
 package br.ufma.ppgee.eds.sistemacontroleestoque;
+import static org.junit.Assert.assertThrows;
+
 import java.sql.SQLException;
 import org.junit.Test;
 
+import br.ufma.ppgee.eds.sistemacontroleestoque.dao.ArmazenamentoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.EstoqueDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.FuncionarioDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.MovimentacaoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.ProdutoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
+import br.ufma.ppgee.eds.sistemacontroleestoque.model.Armazenamento;
 import br.ufma.ppgee.eds.sistemacontroleestoque.model.Estoque;
 import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario;
 import br.ufma.ppgee.eds.sistemacontroleestoque.model.Movimentacao;
@@ -43,4 +47,46 @@ public class TestMovimentacao {
         
     }
 
+    @Test
+    public void saida() throws Exception{
+        MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO(SingletonConnectionDB.getConnection());
+        ArmazenamentoDAO armazenamento=new ArmazenamentoDAO(SingletonConnectionDB.getConnection());
+        EstoqueDAO estoqueDAO=new EstoqueDAO(SingletonConnectionDB.getConnection());
+        ProdutoDAO produtoDAO=new ProdutoDAO(SingletonConnectionDB.getConnection());
+       
+        int quantidadeInicial=armazenamento.get(estoqueDAO.get(1), produtoDAO.get(1)).getQuantidade();
+        int quatidade = 5;
+        movimentacaoDAO.registrarSaida(1,1,"12345678901",quatidade,"jssjsjsj");
+        int quantidadeFinal=armazenamento.get(estoqueDAO.get(1), produtoDAO.get(1)).getQuantidade();
+        assert quantidadeInicial-quatidade==quantidadeFinal;
+    }    
+
+    @Test
+public void entrada() throws Exception{
+    MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO(SingletonConnectionDB.getConnection());
+    ArmazenamentoDAO armazenamento=new ArmazenamentoDAO(SingletonConnectionDB.getConnection());
+    EstoqueDAO estoqueDAO=new EstoqueDAO(SingletonConnectionDB.getConnection());
+    ProdutoDAO produtoDAO=new ProdutoDAO(SingletonConnectionDB.getConnection());
+    int quantidadeInicial=armazenamento.get(estoqueDAO.get(1), produtoDAO.get(1)).getQuantidade();
+    int quatidade = 5;
+    movimentacaoDAO.registrarEntrada(1,1,"12345678901",quatidade,"jssjsjsj");
+
+    int quantidadeFinal=armazenamento.get(estoqueDAO.get(1), produtoDAO.get(1)).getQuantidade();
+    assert quantidadeInicial+quatidade==quantidadeFinal;
+ }
+
+
+ 
+ 
+ @Test
+ public void quantidadeInsuficiente() throws Exception{
+     MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO(SingletonConnectionDB.getConnection());
+ 
+     int quatidade = 100000000;
+
+     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+     movimentacaoDAO.registrarSaida(1,1,"12345678901",quatidade,"jssjsjsj"));
+
+   //  assert IllegalArgumentException.class.getName()== exception.getClass().getName();
+ }  
 }

@@ -8,8 +8,7 @@ public class Produto {
     private String codigoDeBarras;
     private Double preco;
     private String descricao;
-    private Integer quantidadeEmEstoque;
-    private Fabricante fabricante;
+ //   private Fabricante fabricante;
 
 	public Produto() {
     }
@@ -19,8 +18,7 @@ public class Produto {
 		this.codigoDeBarras = codigoDeBarras;
 		this.preco = preco;
 		this.descricao = descricao;
-		this.quantidadeEmEstoque = quantidadeEmEstoque;
-		this.fabricante = fabricante;
+	//	this.fabricante = fabricante;
 	}
 
     public Integer getId() {
@@ -53,18 +51,13 @@ public class Produto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public int getQuantidadeEmEstoque() {
-		return quantidadeEmEstoque;
-	}
-	public void setQuantidadeEmEstoque(int quantidadeEmEstoque) {
-		this.quantidadeEmEstoque = quantidadeEmEstoque;
-	}
+
  
-	public Fabricante getFabricante() {
-		return fabricante;
-	}
-	public void setFabricante(Fabricante fabricante) {
-		this.fabricante = fabricante;
-	}
+	// public Fabricante getFabricante() {
+	// 	return fabricante;
+	// }
+	// public void setFabricante(Fabricante fabricante) {
+	// 	this.fabricante = fabricante;
+	// }
     
 }

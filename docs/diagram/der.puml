@@ -49,9 +49,15 @@ entity RepresentanteFabricante {
   * fabricante: CHAR(14)
 }
 
-entity Armazenamento {
+entity ProdutoFabricante {
+  * produto: INT
+  * fabricante: CHAR(14)
+}
+
+entity ArmazenamentoEstoque {
   * estoque_id: INT
   * produto_id: INT
+  * quantidade: INT
   --
   quantidade: INT
 }
@@ -67,11 +73,13 @@ entity Movimentacao {
   tipoDeTransacao: VARCHAR(11)
 }
 
-Fabricante ||--o{ Produto : fabrica
+ 
+Fabricante ||--o{ ProdutoFabricante : fabrica
+ProdutoFabricante ||--o{ Produto : fabrica
 Representante ||--o{ RepresentanteFabricante : representa
 Fabricante ||--o{ RepresentanteFabricante : representa
-Produto ||--o{ Armazenamento : armazenado_em
-Estoque ||--o{ Armazenamento : possui
+Produto ||--o{ ArmazenamentoEstoque : armazenado_em
+Estoque ||--o{ ArmazenamentoEstoque : possui
 Produto ||--o{ Movimentacao : movimenta
 Funcionario ||--o{ Movimentacao : realiza
 Estoque ||--o{ Movimentacao : envolvido_em

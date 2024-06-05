@@ -9,11 +9,9 @@ public class Movimentacao {
 	}
 	private int id;
     private Date data;
-
 	private int quantidade;
 	private double valorUnitario;
 	private String descricao;
-	
 	private Produto produto;
     private Funcionario funcionario;
     private Estoque estoque;

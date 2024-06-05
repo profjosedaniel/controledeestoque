@@ -26,7 +26,7 @@ public class TestEstoque {
         produto.setNome(nomeP);
         produto.setDescricao(descricaoP);
         produto.setPreco(precoP);
-        produto.setQuantidadeEmEstoque(quantidadeEmEstoqueP);
+        // produto.setQuantidadeEmEstoque(quantidadeEmEstoqueP);
         produto.setCodigoDeBarras(codigoBarrasP);
         //save
         daoProduto.create(produto);
@@ -58,8 +58,7 @@ public class TestEstoque {
         int quantidade=10;
         estoque.setNome(nome);
         estoque.setLocalizacao(endereco);
-        estoque.setQuantidade(quantidade);
-     
+ 
         //save
         Integer id =daoEstoque.create(estoque);
         //check
@@ -76,7 +75,7 @@ public class TestEstoque {
 
 
         estoque2.setLocalizacao(endereco);
-        estoque2.setQuantidade(quantidade);
+
         daoEstoque.update(estoque2);
         //get
         Estoque estoque3 = daoEstoque.findByNome(estoque2.getNome());

@@ -25,7 +25,7 @@ public class TestArmazenamento {
         produto. setNome("Produto 1");
         produto.setDescricao("Descricao 1");
         produto.setPreco(10.0);
-        produto.setQuantidadeEmEstoque(10);
+        // produto.setQuantidadeEmEstoque(10);
         produto.setCodigoDeBarras(codigoDeBarras);
         daoProduto.create(produto);
         produto = daoProduto.get(codigoDeBarras);

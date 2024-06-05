@@ -15,7 +15,7 @@ public class ProdutoDAO implements DAOInterface<Produto, Integer>{
     }
 
     public Produto get(String codigoDeBarras) throws SQLException {
-        String sql = "SELECT ID, Nome, CodigoDeBarras, Preco, Descricao, QuantidadeEmEstoque  FROM Produto WHERE CodigoDeBarras = ?";
+        String sql = "SELECT ID, Nome, CodigoDeBarras, Preco, Descricao  FROM Produto WHERE CodigoDeBarras = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, codigoDeBarras);
         ResultSet resultSet = statement.executeQuery();
@@ -26,7 +26,7 @@ public class ProdutoDAO implements DAOInterface<Produto, Integer>{
             produto.setCodigoDeBarras(resultSet.getString("CodigoDeBarras"));
             produto.setPreco(resultSet.getDouble("Preco"));
             produto.setDescricao(resultSet.getString("Descricao"));
-            produto.setQuantidadeEmEstoque(resultSet.getInt("QuantidadeEmEstoque"));
+            // produto.setQuantidadeEmEstoque(resultSet.getInt("QuantidadeEmEstoque"));
 
 
             return produto;
@@ -34,7 +34,7 @@ public class ProdutoDAO implements DAOInterface<Produto, Integer>{
         return null;
     }
     public Produto get(Integer id) throws SQLException {
-        String sql = "SELECT ID, Nome, CodigoDeBarras, Preco, Descricao, QuantidadeEmEstoque  FROM Produto WHERE ID = ?";
+        String sql = "SELECT ID, Nome, CodigoDeBarras, Preco, Descricao  FROM Produto WHERE ID = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
@@ -45,8 +45,7 @@ public class ProdutoDAO implements DAOInterface<Produto, Integer>{
             produto.setCodigoDeBarras(resultSet.getString("CodigoDeBarras"));
             produto.setPreco(resultSet.getDouble("Preco"));
             produto.setDescricao(resultSet.getString("Descricao"));
-            produto.setQuantidadeEmEstoque(resultSet.getInt("QuantidadeEmEstoque"));
-
+     
             return produto;
         }
         return null;
@@ -64,20 +63,20 @@ public class ProdutoDAO implements DAOInterface<Produto, Integer>{
             produto.setCodigoDeBarras(resultSet.getString("CodigoDeBarras"));
             produto.setPreco(resultSet.getDouble("Preco"));
             produto.setDescricao(resultSet.getString("Descricao"));
-            produto.setQuantidadeEmEstoque(resultSet.getInt("QuantidadeEmEstoque"));
+           
             produtos.add(produto );
         }
         return produtos;
     }
 
     public Integer create(Produto produto) throws SQLException {
-        String sql = "INSERT INTO Produto (Nome, CodigoDeBarras, Preco, Descricao, QuantidadeEmEstoque) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Produto (Nome, CodigoDeBarras, Preco, Descricao) VALUES (?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, produto.getNome());
         statement.setString(2, produto.getCodigoDeBarras());
         statement.setDouble(3, produto.getPreco());
         statement.setString(4, produto.getDescricao());
-        statement.setInt(5, produto.getQuantidadeEmEstoque());
+        
         statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys(); 
         if (rs.next()) { 
@@ -87,14 +86,14 @@ public class ProdutoDAO implements DAOInterface<Produto, Integer>{
     }
 
     public void update(Produto produto) throws SQLException {
-        String sql =  "UPDATE Produto SET Nome = ?, CodigoDeBarras = ?, Preco = ?, Descricao = ?, QuantidadeEmEstoque = ? WHERE ID = ?";
+        String sql =  "UPDATE Produto SET Nome = ?, CodigoDeBarras = ?, Preco = ?, Descricao = ? WHERE ID = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, produto.getNome());
         statement.setString(2, produto.getCodigoDeBarras());
         statement.setDouble(3, produto.getPreco());
         statement.setString(4, produto.getDescricao());
-        statement.setInt(5, produto.getQuantidadeEmEstoque());
-        statement.setInt(6, produto.getId());
+    
+        statement.setInt(5, produto.getId());
         statement.executeUpdate();
     }
 
@@ -121,6 +120,11 @@ public class ProdutoDAO implements DAOInterface<Produto, Integer>{
         delete(o.getId());
     }
 
- 
+    public ResultSet relatorio() throws SQLException {
+        String sql = "SELECT * FROM viewrelatorioproduto";
+        PreparedStatement pstmt  = this.connection.prepareStatement(sql);
+        return pstmt.executeQuery();
+    }
+
  
 }

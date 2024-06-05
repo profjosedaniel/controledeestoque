@@ -1,6 +1,8 @@
 package br.ufma.ppgee.eds.sistemacontroleestoque.cli;
 
  
+import java.sql.SQLException;
+
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.EstoqueDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
 import br.ufma.ppgee.eds.sistemacontroleestoque.model.Estoque;
@@ -10,6 +12,20 @@ public class CLIEstoque extends CLIAbstractCRUD<Estoque> {
    
     private EstoqueDAO estoqueDAO;
 
+    @Override
+    public void opcoesMenu() {
+        super.opcoesMenu();
+        System.out.println("6 - Listar produtos em estoque");
+    }
+
+    @Override
+    public boolean acoesMenu(int opcao) {
+        if(opcao == 6){
+            relatorio();
+            return true;
+        }
+        return super.acoesMenu(opcao);
+    }
 
     public static void main(String[] args) {
             new CLIEstoque(new LerTerminal()).show();
@@ -63,4 +79,11 @@ public class CLIEstoque extends CLIAbstractCRUD<Estoque> {
         return estoque;
     }
           
+    void relatorio() {
+        try {
+            new CliTable().visualize(getDAO().relatorio());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

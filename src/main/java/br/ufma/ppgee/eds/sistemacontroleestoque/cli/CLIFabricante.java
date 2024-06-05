@@ -2,9 +2,12 @@ package br.ufma.ppgee.eds.sistemacontroleestoque.cli;
 
 
 
+import java.sql.ResultSet;
+
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.FabricanteDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
 import br.ufma.ppgee.eds.sistemacontroleestoque.model.Fabricante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
 import br.ufma.util.LerTerminal;
 
 public class CLIFabricante extends CLIAbstractCRUD<Fabricante>{
@@ -18,7 +21,29 @@ public class CLIFabricante extends CLIAbstractCRUD<Fabricante>{
         super(terminal);
         fabricanteDAO = new FabricanteDAO( SingletonConnectionDB.getConnection());
     }
-    
+    @Override
+    public void opcoesMenu() {
+        super.opcoesMenu();
+        System.out.println("6 - Adicionar Produtos ao Fabricante");
+        System.out.println("7 - Remover Produtos ao Fabricante");
+        System.out.println("8 - Relatorio Produtos ao Fabricante");
+    }
+
+    @Override
+    public boolean acoesMenu(int opcao) {
+        if(opcao==6){
+            adicionarProduto();
+            return true;
+        }else if(opcao==7){
+            removerProduto();
+            return true;
+        }else if(opcao==8){
+            relatorioProdutoFabricante();
+            return true;
+        }
+
+        return super.acoesMenu(opcao);
+    }
     
     @Override
     public void showEntity(Fabricante o) {
@@ -77,6 +102,38 @@ public class CLIFabricante extends CLIAbstractCRUD<Fabricante>{
         return Fabricante.class.getSimpleName();
     }
 
-     
-     
+    public void adicionarProduto() {
+        try {
+            Produto produto= new CLIProduto(terminal).get();
+            Fabricante fabricante = get();
+            getDAO().relacionarProdutoFabricante(produto, fabricante);
+        } catch (Exception e) {
+            System.out.println("Erro ao adicionar produto");
+         //   e.printStackTrace();
+        }
+        
+    }
+    public void removerProduto() {
+        try {
+            Produto produto= new CLIProduto(terminal).get();
+            Fabricante fabricante = get();
+            getDAO().removerRelacaoProdutoFabricante(produto, fabricante);
+        } catch (Exception e) {
+            System.out.println("Erro ao remover produto");
+          //  e.printStackTrace();
+        }
+        
+    }
+    
+    public void relatorioProdutoFabricante() {
+        try {
+            System.out.println("Relatório de produtos por fabricante");
+            System.out.println("=======================================");
+            ResultSet relatorio = getDAO().relatorioProdutoFabricante();
+
+            new CliTable().visualize(relatorio);
+        } catch (Exception e) {
+            System.out.println("Erro ao exibir relatório");
+        }
+    }
 }

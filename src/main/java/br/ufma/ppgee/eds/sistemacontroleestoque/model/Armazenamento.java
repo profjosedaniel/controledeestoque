@@ -1,7 +1,8 @@
 package br.ufma.ppgee.eds.sistemacontroleestoque.model;
 
+
 public class Armazenamento {
-    public   Estoque estoque;
+    public  Estoque estoque;
     public  Produto produto;
     public  int quantidade;
 

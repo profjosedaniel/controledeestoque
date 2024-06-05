@@ -85,6 +85,8 @@ public class EstoqueDAO implements DAOInterface<Estoque, Integer> {
         return estoque;
     }
 
+   
+
     public List<Estoque> getAll() throws SQLException {
         List<Estoque> list = new ArrayList<>();
         String sql = "SELECT * FROM Estoque";
@@ -114,5 +116,9 @@ public class EstoqueDAO implements DAOInterface<Estoque, Integer> {
     public void deleteE(Estoque o) throws SQLException {
         delete(o.getId());
     }
-     
+    public ResultSet relatorio() throws SQLException {
+        String sql = "SELECT * FROM viewrelatorioestoque";
+        PreparedStatement pstmt  = this.connection.prepareStatement(sql);
+        return pstmt.executeQuery();
+    }
 }

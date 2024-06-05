@@ -1,5 +1,7 @@
 package br.ufma.ppgee.eds.sistemacontroleestoque.cli;
 
+import java.sql.SQLException;
+
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.DAOInterface;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.RepresentanteDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
@@ -18,12 +20,16 @@ public class CLIRepresentante extends CLIAbstractCRUD<Representante> {
         
         super.opcoesMenu();
         System.out.println("6 - Relacionar Fabricante ao Representante");
+        System.out.println("7 - Relatorio Representante");
     }
 
     @Override
     public boolean acoesMenu(int opcao) {
         if(opcao==6){
             addRepresentanteFabricante();
+            return true;
+        }else if(opcao==7){
+            relatorio();
             return true;
         }
         return super.acoesMenu(opcao);
@@ -51,7 +57,7 @@ public class CLIRepresentante extends CLIAbstractCRUD<Representante> {
     }
 
     @Override
-    public DAOInterface<Representante, ?> getDAO() {
+    public RepresentanteDAO getDAO() {
          return representanteDAO;
     }
 
@@ -98,5 +104,13 @@ public class CLIRepresentante extends CLIAbstractCRUD<Representante> {
         } catch (Exception e) {
             e.printStackTrace();
         } 
+    }
+
+    void relatorio() {
+        try {
+            new CliTable().visualize(getDAO().relatorio());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

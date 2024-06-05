@@ -1,13 +1,18 @@
 package br.ufma.ppgee.eds.sistemacontroleestoque.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
+import br.ufma.ppgee.eds.sistemacontroleestoque.model.Estoque;
+import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario;
 import br.ufma.ppgee.eds.sistemacontroleestoque.model.Movimentacao;
+import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
 
 public class MovimentacaoDAO implements DAOInterface<Movimentacao,Integer>{
     private Connection connection;
@@ -112,4 +117,59 @@ public class MovimentacaoDAO implements DAOInterface<Movimentacao,Integer>{
         delete(o.getId());
     }
 
+    public void registrarSaida(Integer estoque,Integer produto, String funcionario, Integer quantidade, String descricao) throws Exception {
+        Movimentacao movimentacao = new Movimentacao();
+        Produto produto2 = new ProdutoDAO(SingletonConnectionDB.getConnection()).get(produto);
+        Estoque estoque2 = new EstoqueDAO(SingletonConnectionDB.getConnection()).get(estoque);
+        Funcionario funcionario2 = new FuncionarioDAO(SingletonConnectionDB.getConnection()).get(funcionario);
+        ArmazenamentoDAO armazenamentoDAO = new ArmazenamentoDAO(SingletonConnectionDB.getConnection());
+        if(quantidade < 0){ 
+            throw new IllegalArgumentException("");
+        }
+        movimentacao.setTipoDeTransacao(Movimentacao.TipoDeTransacao.SAIDA);
+        movimentacao.setQuantidade( quantidade);
+        movimentacao.setValorUnitario(produto2.getPreco());
+        movimentacao.setDescricao(descricao);
+        movimentacao.setProduto(produto2);
+        movimentacao.setEstoque(estoque2);
+        movimentacao.setFuncionario(funcionario2);
+        movimentacao.setData(new Date(System.currentTimeMillis()));
+
+        armazenamentoDAO.movimentar(estoque2, produto2, (int)(quantidade*-1) );
+        new ProdutoDAO(SingletonConnectionDB.getConnection()).update(produto2);
+        create(movimentacao);    
+    }
+
+    
+    public void registrarEntrada(Integer estoque,Integer produto, String funcionario, Integer quantidade, String descricao) throws Exception {
+        Movimentacao movimentacao = new Movimentacao();
+        Produto produto2 = new ProdutoDAO(SingletonConnectionDB.getConnection()).get(produto);
+        Estoque estoque2 = new EstoqueDAO(SingletonConnectionDB.getConnection()).get(estoque);
+        Funcionario funcionario2 = new FuncionarioDAO(SingletonConnectionDB.getConnection()).get(funcionario);
+        ArmazenamentoDAO armazenamentoDAO = new ArmazenamentoDAO(SingletonConnectionDB.getConnection());
+
+
+        if(quantidade < 0){ 
+            throw new IllegalArgumentException("");
+        }
+        movimentacao.setTipoDeTransacao(Movimentacao.TipoDeTransacao.SAIDA);
+        movimentacao.setQuantidade( quantidade);
+        movimentacao.setValorUnitario(produto2.getPreco());
+        movimentacao.setDescricao(descricao);
+        movimentacao.setProduto(produto2);
+        movimentacao.setEstoque(estoque2);
+        movimentacao.setFuncionario(funcionario2);
+        movimentacao.setData(new Date(System.currentTimeMillis()));
+
+        armazenamentoDAO.movimentar(estoque2, produto2, quantidade);
+    
+        new ProdutoDAO(SingletonConnectionDB.getConnection()).update(produto2);
+        create(movimentacao);    
+    }
+
+    public ResultSet relatorio() throws SQLException {
+        String sql = "SELECT * FROM viewmovimentacao";
+        PreparedStatement pstmt  = this.connection.prepareStatement(sql);
+        return pstmt.executeQuery();
+    }
 }

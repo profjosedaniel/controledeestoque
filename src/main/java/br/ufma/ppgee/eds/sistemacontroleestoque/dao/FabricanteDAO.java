@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.model.Fabricante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
 
 public class FabricanteDAO implements DAOInterface<Fabricante, String>{
 
@@ -96,6 +97,24 @@ public class FabricanteDAO implements DAOInterface<Fabricante, String>{
     public void deleteE(Fabricante o) throws SQLException {
         delete(o.getCnpj());
     }
+    public void relacionarProdutoFabricante(Produto produto,Fabricante fabricante) throws SQLException {
+        String sql =  "INSERT INTO  ProdutoFabricante  (produto, fabricante) VALUES (?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, produto.getId());
+        statement.setString(2, fabricante.getCnpj());
+        statement.executeUpdate();
+    }
+    public void removerRelacaoProdutoFabricante(Produto produto,Fabricante fabricante) throws SQLException {
+        String sql =  "delete from ProdutoFabricante where produto = ? and fabricante = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, produto.getId());
+        statement.setString(2, fabricante.getCnpj());
+        statement.executeUpdate();
+    } 
 
-   
+    public ResultSet relatorioProdutoFabricante() throws SQLException {
+        String sql =  "select * from viewProdutoFabricante";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement.executeQuery();
+    } 
 }
