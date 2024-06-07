@@ -19,9 +19,9 @@ public class CLIMovimentacao extends CLIAbstractCRUD<Movimentacao> {
     @Override
     public void opcoesMenu() {
         super.opcoesMenu();
-        System.out.println("6- Registrar entrada de produtos");
-        System.out.println("7- Registrar saída de produtos");
-        System.out.println("8- Relatório de movimentações");
+        System.out.println("6 - Registrar entrada de produtos");
+        System.out.println("7 - Registrar saída de produtos");
+        System.out.println("8 - Relatório de movimentações");
         
     }
 

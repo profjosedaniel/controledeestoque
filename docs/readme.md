@@ -110,8 +110,8 @@ Todas as classes de entidade no pacote "dao" devem implementar a interface "DAOI
 
 ![Diagrama de Sequencia](diagram/diagramadesequencia.png)
 
-
-## Menu Principal
+## Menus do sistema
+### Menu Principal
 ```
 1 - Produtos
 2 - Funcionarios
@@ -121,7 +121,7 @@ Todas as classes de entidade no pacote "dao" devem implementar a interface "DAOI
 5 - MOVIMENTACAO
 0 - Sair
 ```
-## Menu Padrao das Opções CRUDS das entidades  
+### Menu Padrao das Opções CRUDS das entidades  
 ``` 
 0 - Sair
 1 - Cadastrar <Entidade>
@@ -130,18 +130,76 @@ Todas as classes de entidade no pacote "dao" devem implementar a interface "DAOI
 4 - Excluir <Entidade>
 5 - Listar <Entidade>
 ```
-## Outras Opcoes de Menu Funcionário
+
+### Menu Produto
 ```
+0 - Sair
+1 - Cadastrar Produto
+2 - Consultar Produto
+3 - Atualizar Produto
+4 - Excluir Produto
+5 - Listar Produto
+6 - Relatório de produtos
+```
+### Menu Estoque
+```
+0 - Sair
+1 - Cadastrar Estoque
+2 - Consultar Estoque
+3 - Atualizar Estoque
+4 - Excluir Estoque
+5 - Listar Estoque
+6 - Listar produtos em estoque
+```
+### Menu Fabricante
+```
+0 - Sair
+1 - Cadastrar Fabricante
+2 - Consultar Fabricante
+3 - Atualizar Fabricante
+4 - Excluir Fabricante
+5 - Listar Fabricante
+6 - Adicionar Produtos ao Fabricante
+7 - Remover Produtos ao Fabricante
+8 - Relatorio Produtos ao Fabricante
+```
+
+### Menu Funcionário
+```
+0 - Sair
+1 - Cadastrar Funcionario
+2 - Consultar Funcionario
+3 - Atualizar Funcionario
+4 - Excluir Funcionario
+5 - Listar Funcionario
 6 - Alterar senha
 7 - Alterar papel
 ``` 
-## Outras Opcoes de Menu Funcionario
+###  Menu Movimentacao
 ```
+0 - Sair
+1 - Cadastrar Movimentacao
+2 - Consultar Movimentacao
+3 - Atualizar Movimentacao
+4 - Excluir Movimentacao
+5 - Listar Movimentacao
+6- Registrar entrada de produtos
+7 - Registrar saída de produtos
+8 - Relatório de movimentações
+``` 
+###  Menu Representante
+```
+0 - Sair
+1 - Cadastrar Representante
+2 - Consultar Representante
+3 - Atualizar Representante
+4 - Excluir Representante
+5 - Listar Representante
 6 - Relacionar Fabricante ao Representante
+7 - Relatorio Representante
 ``` 
 
-
-### Implantação do projeto
+## Implantação do projeto
 1. Criar a base de dados "controledeestoque" no postgresql
 2. Carrepar o arquivo "estrutura.sql" no banco de dados
 3. Criar as variaveis de ambiente "pg_user" e "pg_password" com o usuario e senha do postgres respectivamente.

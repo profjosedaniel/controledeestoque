@@ -27,44 +27,56 @@ loop Escolher opção
     alt Opção: Fabricante
         MenuCLI -> FabricanteCLI: Executar FabricanteCLI.java
         activate FabricanteCLI
-        FabricanteCLI -> Usuario: Interação CRUD Fabricante
-        Usuario -> FabricanteCLI: Operação CRUD
+        FabricanteCLI -> Usuario: Listar as opções de CRUD da entidade: Fabricante
+        Usuario -> FabricanteCLI: Enviar a operação CRUD desejada
+        Usuario -> FabricanteCLI: Enviar as informações solicidadas para manicupação da entidade
         FabricanteCLI -> FabricanteCLI: Processar operação
+        FabricanteCLI -> Usuario:  enviar o resultado
         deactivate FabricanteCLI
     else Opção: Produto
         MenuCLI -> ProdutoCLI: Executar ProdutoCLI.java
         activate ProdutoCLI
-        ProdutoCLI -> Usuario: Interação CRUD Produto
-        Usuario -> ProdutoCLI: Operação CRUD
+        ProdutoCLI -> Usuario: Listar as opções de CRUD da entidade: Produto
+        Usuario -> ProdutoCLI: Enviar a operação CRUD desejada
+        Usuario -> ProdutoCLI: Enviar as informações solicidadas para manicupação da entidade
         ProdutoCLI -> ProdutoCLI: Processar operação
+        FabricanteCLI -> Usuario:  Enviar o resultado
         deactivate ProdutoCLI
     else Opção: Estoque
         MenuCLI -> EstoqueCLI: Executar EstoqueCLI.java
         activate EstoqueCLI
-        EstoqueCLI -> Usuario: Interação CRUD Estoque
-        Usuario -> EstoqueCLI: Operação CRUD
+        EstoqueCLI -> Usuario: Listar as opções de CRUD da entidade: Estoque
+        Usuario -> EstoqueCLI: Enviar a operação CRUD desejada
+        Usuario -> EstoqueCLI: Enviar as informações solicidadas para manicupação da entidade
         EstoqueCLI -> EstoqueCLI: Processar operação
+        EstoqueCLI -> Usuario: Enviar o resultado
         deactivate EstoqueCLI
     else Opção: Funcionario
         MenuCLI -> FuncionarioCLI: Executar FuncionarioCLI.java
         activate FuncionarioCLI
-        FuncionarioCLI -> Usuario: Interação CRUD Funcionario
-        Usuario -> FuncionarioCLI: Operação CRUD
+        FuncionarioCLI -> Usuario: Listar as opções de CRUD da entidade: Funcionario
+        Usuario -> FuncionarioCLI: Enviar a operação CRUD desejada
+        Usuario -> FuncionarioCLI: Enviar as informações solicidadas para manicupação da entidade
         FuncionarioCLI -> FuncionarioCLI: Processar operação
+        FuncionarioCLI -> Usuario: Enviar o resultado
         deactivate FuncionarioCLI
     else Opção: Representante
         MenuCLI -> RepresentanteCLI: Executar RepresentanteCLI.java
         activate RepresentanteCLI
-        RepresentanteCLI -> Usuario: Interação CRUD Representante
-        Usuario -> RepresentanteCLI: Operação CRUD
+        RepresentanteCLI -> Usuario: Listar as opções de CRUD da entidade: Representante
+        Usuario -> RepresentanteCLI: Enviar a operação CRUD desejada
+        Usuario -> RepresentanteCLI: Enviar as informações solicidadas para manicupação da entidade
         RepresentanteCLI -> RepresentanteCLI: Processar operação
+        RepresentanteCLI -> Usuario: Enviar o resultado
         deactivate RepresentanteCLI
     else Opção: Movimentação
         MenuCLI -> MovimentacaoCLI: Executar MovimentacaoCLI.java
         activate MovimentacaoCLI
-        MovimentacaoCLI -> Usuario: Interação CRUD Movimentação
-        Usuario -> MovimentacaoCLI: Operação CRUD
+        MovimentacaoCLI -> Usuario: Listar as opções de CRUD da entidade: Movimentação
+        Usuario -> MovimentacaoCLI: Enviar a operação CRUD desejada
+        Usuario -> MovimentacaoCLI: Enviar as informações solicidadas para manicupação da entidade
         MovimentacaoCLI -> MovimentacaoCLI: Processar operação
+        MovimentacaoCLI -> Usuario: Enviar o resultado
         deactivate MovimentacaoCLI
     else Opção: Sair
         Usuario -> MenuCLI: Sair
