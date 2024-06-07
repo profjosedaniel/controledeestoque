@@ -7,7 +7,7 @@ Depois, crie um banco de dados relacional (tabelas e seus relacionamentos) para 
 
 ### Documentação
 ### Bibliotecas Java
-* Driver JDBC para Postgres para a conexão com o banco de * dados PostgreSQL
+* Driver JDBC para Postgres para a conexão com o banco de dados PostgreSQL
 * JUnit para testes unitários dos DAO
 * Maven para importações das bibliotecas
 * pgcrypto do postresql para criptografia de senhas
@@ -101,7 +101,7 @@ Todas as classes de entidade no pacote "dao" devem implementar a interface "DAOI
 ### Modelo Entidade-Relacionamento
  
 
-![Diagrama de Chen](diagram/er.png)
+![Diagrama de Chen](diagram/er2.png)
 
 
 ### Diagrama Entidade Relacionamento
