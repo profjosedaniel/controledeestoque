@@ -81,7 +81,7 @@ public class CLIEstoque extends CLIAbstractCRUD<Estoque> {
           
     void relatorio() {
         try {
-            new CliTable().visualize(getDAO().relatorio());
+            new CliTable().visualize(getDAO().getAllResultSet());
         } catch (SQLException e) {
             e.printStackTrace();
         }

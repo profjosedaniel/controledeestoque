@@ -119,5 +119,12 @@ public class FuncionarioDAO implements DAOInterface<Funcionario, String>{
         }
        
     }
+
+    @Override
+    public ResultSet getAllResultSet() throws SQLException {
+        String sql = "SELECT * FROM Funcionario";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement.executeQuery();
+    }
   
 }

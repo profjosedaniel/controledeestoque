@@ -76,8 +76,8 @@ public class CLIProduto extends CLIAbstractCRUD<Produto>{
     }
 
     public Produto update(Produto produto) {
-        produto.setNome(terminal.nextString("nome",false));
-        produto.setDescricao(terminal.nextLine("descrição",false));
+        produto.setNome(terminal.nextString("nome",true));
+        produto.setDescricao(terminal.nextLine("descrição",true));
         produto.setPreco(terminal.nextDouble("preço",true));
         // produto.setQuantidadeEmEstoque(terminal.nextInt("quantidade",true));
         produto.setCodigoDeBarras(terminal.nextString("código de barras",true));

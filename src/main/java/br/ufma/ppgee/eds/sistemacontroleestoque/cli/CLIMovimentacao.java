@@ -73,7 +73,7 @@ public class CLIMovimentacao extends CLIAbstractCRUD<Movimentacao> {
         System.out.println("Tipo de entrada ou saída:");
         System.out.println("1- Entrada");
         System.out.println("2- Saída");
-        int tipo=terminal.nextInt("tipo", false);
+        int tipo=terminal.nextInt("tipo", true);
         if(tipo==1){
             movimentacao.setTipoDeTransacao(Movimentacao.TipoDeTransacao.ENTRADA);
         }else if(tipo==2){
@@ -83,7 +83,7 @@ public class CLIMovimentacao extends CLIAbstractCRUD<Movimentacao> {
     }
     public Movimentacao load(Movimentacao movimentacao) {
        
-        movimentacao.setQuantidade(terminal.nextInt("Quantidade", false));
+        movimentacao.setQuantidade(terminal.nextInt("Quantidade", true));
         try{
             
             movimentacao.setFuncionario(new CLIFuncionario(terminal).get());

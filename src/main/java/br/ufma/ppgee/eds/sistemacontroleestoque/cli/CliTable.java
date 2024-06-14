@@ -6,7 +6,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.FabricanteDAO;
-import br.ufma.ppgee.eds.sistemacontroleestoque.dao.RepresentanteDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
 
 public class CliTable {

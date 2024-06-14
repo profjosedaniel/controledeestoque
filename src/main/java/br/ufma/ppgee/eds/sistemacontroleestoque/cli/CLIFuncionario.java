@@ -69,9 +69,9 @@ public class CLIFuncionario extends CLIAbstractCRUD<Funcionario>{
     public Funcionario create() {
         Funcionario funcionario = new Funcionario();
         funcionario.setCpf(terminal.nextLine("CPF", true));   
-        funcionario.setNome(terminal.nextLine("Nome", false)); 
-        funcionario.setEmail(terminal.nextLine("Email", false));
-        funcionario.setTelefone(terminal.nextLine("Telefone", false));
+        funcionario.setNome(terminal.nextLine("Nome", true)); 
+        funcionario.setEmail(terminal.nextLine("Email", true));
+        funcionario.setTelefone(terminal.nextLine("Telefone", true));
         changePassword(funcionario);
         changePapel(funcionario);
         return funcionario;
@@ -81,9 +81,9 @@ public class CLIFuncionario extends CLIAbstractCRUD<Funcionario>{
     @Override
     public Funcionario update(Funcionario funcionario) { 
         funcionario.setCpf(terminal.nextLine("CPF", true));   
-        funcionario.setNome(terminal.nextLine("Nome", false)); 
-        funcionario.setEmail(terminal.nextLine("Email", false));
-        funcionario.setTelefone(terminal.nextLine("Telefone", false));
+        funcionario.setNome(terminal.nextLine("Nome", true)); 
+        funcionario.setEmail(terminal.nextLine("Email", true));
+        funcionario.setTelefone(terminal.nextLine("Telefone", true));
         changePassword(funcionario);
         return funcionario;
         

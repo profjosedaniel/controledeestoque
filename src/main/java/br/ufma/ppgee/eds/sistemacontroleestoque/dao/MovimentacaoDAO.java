@@ -172,4 +172,11 @@ public class MovimentacaoDAO implements DAOInterface<Movimentacao,Integer>{
         PreparedStatement pstmt  = this.connection.prepareStatement(sql);
         return pstmt.executeQuery();
     }
+
+    @Override
+    public ResultSet getAllResultSet() throws SQLException {
+        String sql="SELECT * FROM Movimentacao";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement.executeQuery();
+    }
 }

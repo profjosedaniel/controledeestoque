@@ -116,5 +116,13 @@ public class FabricanteDAO implements DAOInterface<Fabricante, String>{
         String sql =  "select * from viewProdutoFabricante";
         PreparedStatement statement = connection.prepareStatement(sql);
         return statement.executeQuery();
+    }
+
+    @Override
+    public ResultSet getAllResultSet() throws SQLException {
+ 
+        String sql = "SELECT * FROM Fabricante";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement.executeQuery();
     } 
 }

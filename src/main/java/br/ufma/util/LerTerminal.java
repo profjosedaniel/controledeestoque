@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Scanner;
 
 public class LerTerminal {
     public static BufferedReader input ;
@@ -35,6 +34,9 @@ public class LerTerminal {
                     return str.trim() ;
             }catch(Exception e){
                 System.out.println("Valor inválido, digite um valor para "+label+":");
+            }
+            if(obrigatorio){
+                System.out.println("Você deve digitar um valor válido para "+label+"!");
             }
         }while(obrigatorio);
         return null;

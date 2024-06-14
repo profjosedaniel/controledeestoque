@@ -126,5 +126,12 @@ public class ProdutoDAO implements DAOInterface<Produto, Integer>{
         return pstmt.executeQuery();
     }
 
+    @Override
+    public ResultSet getAllResultSet() throws SQLException {
+        String sql = "SELECT * FROM Produto";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement.executeQuery();
+    }
+
  
 }

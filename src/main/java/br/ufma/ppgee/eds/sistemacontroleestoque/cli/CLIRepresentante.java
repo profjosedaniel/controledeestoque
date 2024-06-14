@@ -2,7 +2,6 @@ package br.ufma.ppgee.eds.sistemacontroleestoque.cli;
 
 import java.sql.SQLException;
 
-import br.ufma.ppgee.eds.sistemacontroleestoque.dao.DAOInterface;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.RepresentanteDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
 import br.ufma.ppgee.eds.sistemacontroleestoque.model.Fabricante;

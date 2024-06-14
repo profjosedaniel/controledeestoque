@@ -1,5 +1,6 @@
 package br.ufma.ppgee.eds.sistemacontroleestoque.cli;
 
+import java.sql.SQLException;
 import java.util.List;
 import br.ufma.util.LerTerminal;
 
@@ -125,8 +126,8 @@ public abstract class CLIAbstractCRUD<T> implements CLIInterface<T> {
         }
     }
 
-    @Override
-    public void getAllEntity() {
+ 
+    public void getAllEntityBasic() {
         try{
             List<T> l =getDAO().getAll();
             for(T entity : l ){
@@ -139,5 +140,18 @@ public abstract class CLIAbstractCRUD<T> implements CLIInterface<T> {
         }
     }
 
+    
+    public void getBasicReport() {
+         try {
+            new CliTable().visualize(getDAO().getAllResultSet());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void getAllEntity() {
+        getBasicReport();
+    }
 
 }

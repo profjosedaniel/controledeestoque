@@ -153,4 +153,11 @@ public class RepresentanteDAO implements DAOInterface<Representante, String> {
         ResultSet resultSet = statement.executeQuery();
         return resultSet;
     }
+
+    @Override
+    public ResultSet getAllResultSet() throws SQLException {
+        String sql = "SELECT * FROM Representante";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement.executeQuery();
+    }
  }

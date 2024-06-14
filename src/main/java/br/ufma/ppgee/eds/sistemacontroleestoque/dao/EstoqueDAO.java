@@ -103,9 +103,10 @@ public class EstoqueDAO implements DAOInterface<Estoque, Integer> {
                  list.add(estoque);
                  
             }
-    
         return list;
     }
+
+    
     public void delete(Integer id) throws SQLException {
         String sql = "DELETE FROM Estoque WHERE id = ?";
         PreparedStatement pstmt = this.connection.prepareStatement(sql) ;
@@ -118,6 +119,13 @@ public class EstoqueDAO implements DAOInterface<Estoque, Integer> {
     }
     public ResultSet relatorio() throws SQLException {
         String sql = "SELECT * FROM viewrelatorioestoque";
+        PreparedStatement pstmt  = this.connection.prepareStatement(sql);
+        return pstmt.executeQuery();
+    }
+    @Override
+    public ResultSet getAllResultSet() throws SQLException {
+        List<Estoque> list = new ArrayList<>();
+        String sql = "SELECT * FROM Estoque";
         PreparedStatement pstmt  = this.connection.prepareStatement(sql);
         return pstmt.executeQuery();
     }
