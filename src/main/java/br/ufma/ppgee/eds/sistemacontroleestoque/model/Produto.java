@@ -52,6 +52,14 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
+	@Override
+	public String toString() {
+		return id+":"+nome;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		return this.id.equals(((Produto)obj).getId());
+	}
  
 	// public Fabricante getFabricante() {
 	// 	return fabricante;
