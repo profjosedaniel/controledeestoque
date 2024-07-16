@@ -1,13 +1,13 @@
-drop table if exists representanteFabricante;
-drop table if exists ProdutoFabricante;
-drop table if exists movimentacao;
-drop table if exists armazenamento;
-drop table if exists representante;
-drop table if exists funcionario;
-drop table if exists estoque;
-drop table if exists produto;
-drop table if exists fabricante;
-
+drop table if exists representanteFabricante CASCADE ;
+drop table if exists ProdutoFabricante CASCADE ;
+drop table if exists movimentacao CASCADE;
+drop table if exists armazenamento CASCADE;
+drop table if exists representante CASCADE;
+drop table if exists funcionario CASCADE;
+drop table if exists estoque CASCADE;
+drop table if exists produto CASCADE;
+drop table if exists fabricante CASCADE;
+drop table if exists LOG_Movimentacao CASCADE;
 drop EXTENSION pgcrypto;
 
 -- drop table if exists user;
@@ -23,7 +23,7 @@ CREATE TABLE Fabricante (
 
 CREATE TABLE Produto (
 	id integer   primary key generated always as identity,
-	nome VARCHAR(255) check(LENGTH(nome)>10) not null,
+	nome VARCHAR(255) check(LENGTH(nome)>2) not null,
 	codigoDeBarras VARCHAR(255) unique not null,
 	preco float check(preco>0) not null,
 	descricao TEXT,
@@ -67,7 +67,7 @@ CONSTRAINT ck_password CHECK ( LENGTH("password") > 14)
 CREATE TABLE Representante (
 	cpf CHAR(11) primary key,
 	nome VARCHAR(255) check( LENGTH(nome)>0) not null,
-	telefone INT(11),
+	telefone CHAR(11),
 	email VARCHAR(100) check( LENGTH(nome)>0) not null
 );
 
@@ -105,6 +105,35 @@ CREATE TABLE Movimentacao (
 	FOREIGN KEY (funcionario) REFERENCES Funcionario(cpf),
 	FOREIGN KEY (estoque) REFERENCES Estoque(id)
 );
+
+CREATE TABLE LOG_Movimentacao (
+    id integer primary key generated always as identity,
+    Movimentacao_id integer,
+    dataEHoraOld timestamp,
+    dataEHoraNew timestamp,
+    quantidadeOld INT,
+    quantidadeNew INT,
+    produtoOld integer,
+    produtoNew integer,
+    funcionarioOld varCHAR(11),
+    funcionarioNew varCHAR(11),
+    estoqueOld integer,
+    estoqueNew integer,
+    tipoDeTransacaoOld varCHAR(11),
+    tipoDeTransacaoNew varCHAR(11),
+    descricao varCHAR(250),
+    valorunitarioOld float,
+    valorunitarioNew float,
+    FOREIGN KEY (Movimentacao_id) REFERENCES Movimentacao(id),
+    FOREIGN KEY (produtoOld) REFERENCES Produto(id),
+    FOREIGN KEY (produtoNew) REFERENCES Produto(id),
+    FOREIGN KEY (funcionarioOld) REFERENCES Funcionario(cpf),
+    FOREIGN KEY (funcionarioNew) REFERENCES Funcionario(cpf),
+    FOREIGN KEY (estoqueOld) REFERENCES Estoque(id),
+    FOREIGN KEY (estoqueNew) REFERENCES Estoque(id)
+);
+
+
 
 drop  INDEX if exists idx_Fabricante_cnpj;
 drop  INDEX if exists idx_Fabricante_nome;
@@ -151,3 +180,51 @@ CREATE INDEX idx_armazenamento ON armazenamento (estoque_id,produto_id);
 drop INDEX if exists idx_Movimentacao_id;
 CREATE INDEX idx_Movimentacao_id ON Movimentacao (id);
 
+ 
+-- Função que será chamada pela trigger
+CREATE OR REPLACE FUNCTION log_movimentacao_update() RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO LOG_Movimentacao (
+        Movimentacao_id,
+        dataEHoraOld,
+        dataEHoraNew,
+        quantidadeOld,
+        quantidadeNew,
+        produtoOld,
+        produtoNew,
+        funcionarioOld,
+        funcionarioNew,
+        estoqueOld,
+        estoqueNew,
+        tipoDeTransacaoOld,
+        tipoDeTransacaoNew,
+        descricao,
+        valorunitarioOld,
+        valorunitarioNew
+    ) VALUES (
+        OLD.id,
+        OLD.dataEHora,
+        NEW.dataEHora,
+        OLD.quantidade,
+        NEW.quantidade,
+        OLD.produto,
+        NEW.produto,
+        OLD.funcionario,
+        NEW.funcionario,
+        OLD.estoque,
+        NEW.estoque,
+        OLD.tipoDeTransacao,
+        NEW.tipoDeTransacao,
+        NEW.descricao,
+        OLD.valorunitario,
+        NEW.valorunitario
+    );
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger para a tabela Movimentacao
+CREATE TRIGGER trg_log_movimentacao_update
+AFTER UPDATE ON Movimentacao
+FOR EACH ROW
+EXECUTE FUNCTION log_movimentacao_update();

@@ -9,5 +9,5 @@ public interface ActionRow{
     void action(Map<String,String> row)  throws Exception;
     String column() ;
     TableCellRenderer render();
-    Object get(Object value);
+    Object get(Object value,Map<String,String> row);
 }

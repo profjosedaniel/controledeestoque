@@ -4,8 +4,8 @@ import java.sql.SQLException;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.RepresentanteDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Fabricante;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Representante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Fabricante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Representante;
 import br.ufma.util.LerTerminal;
 
 public class CLIRepresentante extends CLIAbstractCRUD<Representante> {

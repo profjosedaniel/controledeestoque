@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Estoque;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Movimentacao;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Estoque;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Funcionario;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Movimentacao;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Produto;
 
 public class MovimentacaoDAO implements DAOInterface<Movimentacao,Integer>{
     private Connection connection;
@@ -91,7 +91,7 @@ public class MovimentacaoDAO implements DAOInterface<Movimentacao,Integer>{
 
     @Override
     public List<Movimentacao> getAll() throws SQLException {
-        String sql="SELECT * FROM Movimentacao";
+        String sql="SELECT * FROM Movimentacao order by id asc";
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
         List<Movimentacao> movimentacoes = new ArrayList<Movimentacao>();

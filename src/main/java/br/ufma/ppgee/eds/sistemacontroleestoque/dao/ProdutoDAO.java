@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Produto;
 
 public class ProdutoDAO implements DAOInterface<Produto, Integer>{
 
@@ -53,7 +53,7 @@ public class ProdutoDAO implements DAOInterface<Produto, Integer>{
 
     public List<Produto> getAll() throws SQLException {
         List<Produto> produtos = new ArrayList<>();
-        String sql = "SELECT * FROM Produto";
+        String sql = "SELECT * FROM Produto order by ID asc";
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {

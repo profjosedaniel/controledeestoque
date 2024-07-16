@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Order;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.EstoqueDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.ProdutoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Estoque;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Estoque;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Produto;
 
 public class TestEstoque {
     

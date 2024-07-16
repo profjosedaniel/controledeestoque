@@ -4,7 +4,7 @@ import java.sql.SQLException;
  
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.ProdutoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Produto;
 import br.ufma.util.LerTerminal;
 
 public class CLIProduto extends CLIAbstractCRUD<Produto>{

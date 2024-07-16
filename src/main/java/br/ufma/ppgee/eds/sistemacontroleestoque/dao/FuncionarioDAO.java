@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Funcionario;
 
 public class FuncionarioDAO implements DAOInterface<Funcionario, String>{
 
@@ -36,9 +36,9 @@ public class FuncionarioDAO implements DAOInterface<Funcionario, String>{
         return null;
     }
 
-    public List<Funcionario> getAll() throws SQLException {
+    public List<Funcionario> getAll() throws Exception {
         List<Funcionario> funcionarios = new ArrayList<>();
-        String sql = "SELECT * FROM Funcionario";
+        String sql = "SELECT * FROM Funcionario order by CPF asc";
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {

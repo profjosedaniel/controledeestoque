@@ -1,5 +1,6 @@
 package br.ufma.ppgee.eds.sistemacontroleestoque.cli;
 
+import br.ufma.ppgee.eds.sistemacontroleestoque.acl.PapelUsuario;
 import br.ufma.util.LerTerminal;
  
 public class CLIMenu {
@@ -14,33 +15,33 @@ public class CLIMenu {
         while(true){
             LerTerminal terminal = new LerTerminal();
             System.out.println("==========Menu================");
-            if(CLILogin.papelACL.menuProduto())
+            if(PapelUsuario.getPapel().menuProduto())
                 System.out.println(OPCAO_PRODUTOS+" - Produtos");
-            if(CLILogin.papelACL.menuFuncionario())
+            if(PapelUsuario.getPapel().menuFuncionario())
                 System.out.println(OPCAO_FUNCIONARIOS+" - Funcionarios");
-            if(CLILogin.papelACL.menuFabricante())
+            if(PapelUsuario.getPapel().menuFabricante())
                 System.out.println(OPCAO_FABRICANTE+" - Fabricante");
-            if(CLILogin.papelACL.menuEstoque())
+            if(PapelUsuario.getPapel().menuEstoque())
                 System.out.println(OPCAO_ESTOQUE+" - Estoque");
-            if(CLILogin.papelACL.menuRepresentante())
+            if(PapelUsuario.getPapel().menuRepresentante())
                 System.out.println(OPCAO_REPRESENTANTE+" - Representante");
-            if(CLILogin.papelACL.menuMovimentacao())
+            if(PapelUsuario.getPapel().menuMovimentacao())
                 System.out.println(OPCAO_MOVIMENTACAO+" - Movimentacao");
             System.out.println("0 - Sair");
             System.out.println("=======================================");
     
             Integer opcao = terminal.nextInt("Selecione uma opção válida",true);
-            if (opcao==OPCAO_ESTOQUE && CLILogin.papelACL.menuEstoque()) {
+            if (opcao==OPCAO_ESTOQUE && PapelUsuario.getPapel().menuEstoque()) {
                 new CLIProduto(terminal).show();
-            } else if (opcao==OPCAO_FUNCIONARIOS && CLILogin.papelACL.menuFuncionario()) {
+            } else if (opcao==OPCAO_FUNCIONARIOS && PapelUsuario.getPapel().menuFuncionario()) {
                 new CLIFuncionario(terminal).show();
-            } else if (opcao==OPCAO_FABRICANTE && CLILogin.papelACL.menuFabricante() ){
+            } else if (opcao==OPCAO_FABRICANTE && PapelUsuario.getPapel().menuFabricante() ){
                 new CLIFabricante(terminal).show();
-            } else if (opcao==OPCAO_PRODUTOS && CLILogin.papelACL.menuProduto()) {
+            } else if (opcao==OPCAO_PRODUTOS && PapelUsuario.getPapel().menuProduto()) {
                 new CLIProduto(terminal).show();
-            } else if (opcao==OPCAO_REPRESENTANTE && CLILogin.papelACL.menuRepresentante()) {
+            } else if (opcao==OPCAO_REPRESENTANTE && PapelUsuario.getPapel().menuRepresentante()) {
                 new CLIRepresentante(terminal).show();
-            } else if (opcao==OPCAO_MOVIMENTACAO && CLILogin.papelACL.menuMovimentacao()) {
+            } else if (opcao==OPCAO_MOVIMENTACAO && PapelUsuario.getPapel().menuMovimentacao()) {
                 new CLIMovimentacao(terminal).show();
             } else if (opcao==0){
                 System.exit(0);

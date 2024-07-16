@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Estoque;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Estoque;
  
 public class EstoqueDAO implements DAOInterface<Estoque, Integer> {
  
@@ -89,7 +89,7 @@ public class EstoqueDAO implements DAOInterface<Estoque, Integer> {
 
     public List<Estoque> getAll() throws SQLException {
         List<Estoque> list = new ArrayList<>();
-        String sql = "SELECT * FROM Estoque";
+        String sql = "SELECT * FROM Estoque order by id asc";
 
         
              PreparedStatement pstmt  = this.connection.prepareStatement(sql);
@@ -122,6 +122,14 @@ public class EstoqueDAO implements DAOInterface<Estoque, Integer> {
         PreparedStatement pstmt  = this.connection.prepareStatement(sql);
         return pstmt.executeQuery();
     }
+
+    public ResultSet relatorioEstoqueProdutos() throws SQLException {
+        String sql = "SELECT * FROM viewrelatorioquantidadeprodutosestoque";
+        PreparedStatement pstmt  = this.connection.prepareStatement(sql);
+        return pstmt.executeQuery();
+    }
+
+
     @Override
     public ResultSet getAllResultSet() throws SQLException {
         List<Estoque> list = new ArrayList<>();

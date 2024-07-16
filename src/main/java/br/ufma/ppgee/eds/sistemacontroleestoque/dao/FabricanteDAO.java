@@ -3,8 +3,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Fabricante;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Fabricante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Produto;
 
 public class FabricanteDAO implements DAOInterface<Fabricante, String>{
 
@@ -50,7 +50,7 @@ public class FabricanteDAO implements DAOInterface<Fabricante, String>{
     }
     public List<Fabricante> getAll() throws SQLException {
         List<Fabricante> fabricantes = new ArrayList<>();
-        String sql = "SELECT * FROM Fabricante";
+        String sql = "SELECT * FROM Fabricante order by cnpj asc";
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
@@ -104,6 +104,36 @@ public class FabricanteDAO implements DAOInterface<Fabricante, String>{
         statement.setString(2, fabricante.getCnpj());
         statement.executeUpdate();
     }
+
+    public boolean checkProdutoFabricante(Produto produto,Fabricante fabricante) throws SQLException {
+        String sql =  "select * from  ProdutoFabricante where  produto = ? and fabricante = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, produto.getId());
+        statement.setString(2, fabricante.getCnpj());
+        ResultSet result = statement.executeQuery();
+        return result.next();
+    }
+
+    public ArrayList<Fabricante> getFabricantes(Integer idProduto) throws SQLException {
+        String sql =  "SELECT public.fabricante.* FROM public.produto inner join public.produtofabricante ON produtofabricante.produto = produto.id inner join public.fabricante ON fabricante.cnpj = produtofabricante.fabricante where produto.id = ?";
+                        
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, idProduto);
+        ResultSet result = statement.executeQuery();
+        ArrayList<Fabricante> fabricantes = new ArrayList();
+        while (result.next()) {
+            Fabricante fabricante = new Fabricante(
+                    result.getString("cnpj"),
+                    result.getString("nome"),
+                    result.getString("endereco"),
+                    result.getString("contato")
+            );
+            fabricantes.add(fabricante);
+        }
+        return fabricantes;
+    }
+
+
     public void removerRelacaoProdutoFabricante(Produto produto,Fabricante fabricante) throws SQLException {
         String sql =  "delete from ProdutoFabricante where produto = ? and fabricante = ?";
         PreparedStatement statement = connection.prepareStatement(sql);

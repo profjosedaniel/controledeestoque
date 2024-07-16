@@ -10,11 +10,11 @@ import br.ufma.ppgee.eds.sistemacontroleestoque.dao.FuncionarioDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.MovimentacaoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.ProdutoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Armazenamento;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Estoque;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Movimentacao;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Armazenamento;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Estoque;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Funcionario;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Movimentacao;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Produto;
 
 public class TestMovimentacao {
 

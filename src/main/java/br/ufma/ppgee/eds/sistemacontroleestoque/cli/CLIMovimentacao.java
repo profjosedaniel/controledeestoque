@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.MovimentacaoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Movimentacao;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Movimentacao;
 import br.ufma.util.LerTerminal;
 
 public class CLIMovimentacao extends CLIAbstractCRUD<Movimentacao> {

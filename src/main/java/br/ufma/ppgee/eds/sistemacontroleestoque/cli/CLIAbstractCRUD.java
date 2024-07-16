@@ -144,7 +144,7 @@ public abstract class CLIAbstractCRUD<T> implements CLIInterface<T> {
     public void getBasicReport() {
          try {
             new CliTable().visualize(getDAO().getAllResultSet());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

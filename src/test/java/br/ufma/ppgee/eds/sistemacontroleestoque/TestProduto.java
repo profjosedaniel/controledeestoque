@@ -8,8 +8,8 @@ import org.junit.Test;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.FabricanteDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.ProdutoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Fabricante;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Fabricante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Produto;
 
 public class TestProduto {
 

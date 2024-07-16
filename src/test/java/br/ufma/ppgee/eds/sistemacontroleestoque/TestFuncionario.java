@@ -11,8 +11,8 @@ import org.junit.runners.MethodSorters;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.FuncionarioDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario.Papel;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Funcionario;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Funcionario.Papel;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestFuncionario {

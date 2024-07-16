@@ -8,9 +8,11 @@ import java.util.Map;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.ProdutoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Produto;
+import br.ufma.ppgee.eds.sistemacontroleestoque.validation.Validation;
+import br.ufma.ppgee.eds.sistemacontroleestoque.validation.ValidationFieldException;
 
-public class ProdutoAdapter {
+public class ProdutoAdapter implements AdapterInterface<Produto>{
     private ProdutoDAO dao;
     public ProdutoAdapter(){
          dao =new ProdutoDAO(SingletonConnectionDB.getConnection());
@@ -19,7 +21,12 @@ public class ProdutoAdapter {
         return new String[] {"id","nome","codigoDeBarras","preco"};
     }
 
-    public Produto load(  Map<String,String>  values){
+    public Produto load(  Map<String,String>  values) throws ValidationFieldException{
+        Validation.minMaxSizeString(values.get("nome"), "nome",5,100);
+        Validation.minMaxSizeString(values.get("codigoDeBarras"), "codigoDeBarras",5,50);
+        Validation.minmaxFloat(values.get("preco"), "preco", 0.001f,100000000f);
+
+
         Produto produto = new Produto();
         if(!(values.get("id")==null||values.get("id").isEmpty())){
             produto.setId(Integer.parseInt(values.get("id")));
@@ -32,7 +39,7 @@ public class ProdutoAdapter {
 
     }
 
-    Map<String,String> get(Produto produto){
+    public Map<String,String> get(Produto produto){
         HashMap<String,String> map=new HashMap<String,String>();
         map.put("id",produto.getId().toString());
         map.put("nome",produto.getNome());
@@ -40,11 +47,12 @@ public class ProdutoAdapter {
         map.put("preco",produto.getPreco().toString());
         return map;
     }
+    
     public List<Map> getList() throws SQLException{
         List<Map> list=new ArrayList<Map>();
         
-        dao.getAll().forEach(produto -> {
-            list.add(get(produto));
+        dao.getAll().forEach(value -> {
+            list.add(get(value));
         });
 
         return list;

@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Order;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.FuncionarioDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario.Papel;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Funcionario;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Funcionario.Papel;
 
 public class TestUser {
     @Test

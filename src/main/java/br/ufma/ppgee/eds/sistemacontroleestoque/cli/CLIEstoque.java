@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.EstoqueDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Estoque;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Estoque;
 import br.ufma.util.LerTerminal;
 
 public class CLIEstoque extends CLIAbstractCRUD<Estoque> {

@@ -4,8 +4,8 @@ import java.sql.SQLException;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.FuncionarioDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Funcionario.Papel;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Funcionario;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Funcionario.Papel;
 import br.ufma.util.LerTerminal;
 
 public class CLIFuncionario extends CLIAbstractCRUD<Funcionario>{

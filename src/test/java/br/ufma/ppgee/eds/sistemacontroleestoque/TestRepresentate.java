@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Order;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.FabricanteDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.RepresentanteDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Fabricante;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Representante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Fabricante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Representante;
 
 public class TestRepresentate {
 @Test

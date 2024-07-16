@@ -9,9 +9,9 @@ import br.ufma.ppgee.eds.sistemacontroleestoque.dao.ArmazenamentoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.EstoqueDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.ProdutoDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Armazenamento;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Estoque;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Produto;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Armazenamento;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Estoque;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Produto;
 
 public class TestArmazenamento {
 
@@ -50,7 +50,7 @@ public class TestArmazenamento {
         armazenamento.setProduto(produto);
         armazenamento.setQuantidade(10);
  
-        daoArmazenamento.save(armazenamento);
+        daoArmazenamento.create(armazenamento);
         armazenamento = daoArmazenamento.get(estoque, produto);
         assert armazenamento != null;
         //check
@@ -61,7 +61,7 @@ public class TestArmazenamento {
         armazenamento = daoArmazenamento.get(estoque, produto);
         assert armazenamento.getQuantidade() == 10;
         //delete
-        daoArmazenamento.delete(armazenamento);
+        daoArmazenamento.deleteE(armazenamento);
         armazenamento = daoArmazenamento.get(estoque, produto);
         assert armazenamento == null;
     }

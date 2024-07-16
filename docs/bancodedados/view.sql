@@ -40,6 +40,18 @@ estoque join armazenamento ON armazenamento.estoque_id = estoque.id
 group by  id, nome, localizacao
 order by nome ASC ;
 
+-- viewrelatorioquantidadeprodutosestoque
+-- A view combina dados das tabelas estoque, armazenamento e produto para fornecer um relatório detalhado da quantidade de produtos em cada estoque. 
+drop  view if exists  viewrelatorioquantidadeprodutosestoque;
+
+create  view viewrelatorioquantidadeprodutosestoque as
+select estoque.nome as estoque,  produto.nome as produto,  sum(quantidade) as quantidade 
+from estoque 
+join armazenamento ON armazenamento.estoque_id = estoque.id
+join produto ON armazenamento.produto_id = produto.id
+group by  produto.nome, estoque.nome
+order by  produto.nome, estoque.nome;
+
 -- viewmovimentacao
 -- A view combina dados das tabelas movimentacao, estoque, produto e funcionario para fornecer um relatório detalhado das movimentações de produtos. 
 drop  view if exists  viewmovimentacao;

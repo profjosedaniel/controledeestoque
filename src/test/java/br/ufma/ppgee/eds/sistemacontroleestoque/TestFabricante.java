@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import br.ufma.ppgee.eds.sistemacontroleestoque.dao.FabricanteDAO;
 import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Fabricante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Fabricante;
 
 public class TestFabricante {
 

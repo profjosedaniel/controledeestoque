@@ -3,8 +3,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Fabricante;
-import br.ufma.ppgee.eds.sistemacontroleestoque.model.Representante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.database.SingletonConnectionDB;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Fabricante;
+import br.ufma.ppgee.eds.sistemacontroleestoque.entities.Representante;
 
 public class RepresentanteDAO implements DAOInterface<Representante, String> {
 
@@ -29,6 +30,32 @@ public class RepresentanteDAO implements DAOInterface<Representante, String> {
         return representantes;
     }
 
+    public List<Representante> getRepresentantes(String cnpj) throws SQLException {
+        String sql = "SELECT * FROM RepresentanteFabricante WHERE Fabricante = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, cnpj);
+        ResultSet resultSet = statement.executeQuery();
+        List<Representante> representantes = new ArrayList<Representante>();
+        RepresentanteDAO dao=new RepresentanteDAO(SingletonConnectionDB.getConnection());
+
+        while (resultSet.next()) {
+            Representante representante = dao.get(resultSet.getString("representante"));
+            representantes.add(representante);
+        }
+        return representantes;
+    }
+
+    public boolean checkRepresentacao(Representante representante, Fabricante fabricante) throws SQLException {
+        String sql = "SELECT * FROM RepresentanteFabricante WHERE Representante = ? and Fabricante=? ";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        
+        statement.setString(1, representante.getCpf());
+        statement.setString(2, fabricante.getCnpj());
+
+        ResultSet resultSet = statement.executeQuery();
+        return resultSet.next();
+    }
+
     public void createRepresentacao(Representante representante, Fabricante fabricante) throws SQLException {
         String sql="insert into RepresentanteFabricante (Representante, Fabricante) values (?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -47,15 +74,18 @@ public class RepresentanteDAO implements DAOInterface<Representante, String> {
 
     public void updateListaRepresentacoes(Representante representante) throws SQLException {
         List<Fabricante> fabricantesAtuais = getAllFabricantes(representante.getCpf());
-        for (Fabricante fabricante : representante.getFabricante()) {
-            if (!fabricantesAtuais.contains(fabricante)) {
-                createRepresentacao(representante, fabricante);
+        if(fabricantesAtuais!=null&&representante.getFabricante()!=null){
+
+            for (Fabricante fabricante : representante.getFabricante()) {
+                if (fabricantesAtuais!=null&&!fabricantesAtuais.contains(fabricante)) {
+                    createRepresentacao(representante, fabricante);
+                }
             }
-        }
-        for (Fabricante fabricante : fabricantesAtuais) {
-             if (!representante.getFabricante().contains(fabricante)) {
-                 deleteRepresentacao(representante, fabricante);
-             }
+            for (Fabricante fabricante : fabricantesAtuais) {
+                if (representante!=null&&!representante.getFabricante().contains(fabricante)) {
+                    deleteRepresentacao(representante, fabricante);
+                }
+            }
         }
     }
 
@@ -80,7 +110,7 @@ public class RepresentanteDAO implements DAOInterface<Representante, String> {
 
     public List<Representante> getAll() throws SQLException {
         List<Representante> representantes = new ArrayList<>();
-        String sql = "SELECT * FROM Representante";
+        String sql = "SELECT * FROM Representante order by cpf asc";
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
@@ -147,7 +177,7 @@ public class RepresentanteDAO implements DAOInterface<Representante, String> {
 
   
     public ResultSet relatorio() throws SQLException {
-        String sql = "SELECT  * from representantes_fabricantes";
+        String sql = "SELECT  * from viewrepresentantes_fabricantes";
         PreparedStatement statement = connection.prepareStatement(sql);
  
         ResultSet resultSet = statement.executeQuery();
